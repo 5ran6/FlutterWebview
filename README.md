@@ -1,4 +1,4 @@
-# payza
+# Payza.ng
 
 Payza Nigeria is the No 1 online platform for paying your electricity, televsion and mobile bills
 
