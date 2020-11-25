@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/payza.iml" filepath="$PROJECT_DIR$/payza.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/payza_android.iml" filepath="$PROJECT_DIR$/android/payza_android.iml" />
     </modules>
   </component>
 </project>
