@@ -32,7 +32,7 @@ class WebViewExample extends StatefulWidget {
 
 class _WebViewExampleState extends State<WebViewExample> {
   final Completer<WebViewController> _controller =
-      Completer<WebViewController>();
+  Completer<WebViewController>();
   bool isLoading = false;
 
   Future initState() {
@@ -42,22 +42,23 @@ class _WebViewExampleState extends State<WebViewExample> {
 
   Future<bool> _onWillPop() async {
     return (await showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit Payza?'),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text('No'),
-              ),
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: new Text('Yes'),
-              ),
-            ],
+      context: context,
+      builder: (context) =>
+      new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit Payza?'),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: new Text('No'),
           ),
-        )) ??
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: new Text('Yes'),
+          ),
+        ],
+      ),
+    )) ??
         false;
   }
 
@@ -100,54 +101,55 @@ class _WebViewExampleState extends State<WebViewExample> {
         onWillPop: _onWillPop,
         child: new RefreshIndicator(
           onRefresh: () => reload(),
-          child: Stack(
-            children: [ListView(),
-              WebView(
-                initialUrl: 'https://payza.ng/login.php',
-                javascriptMode: JavascriptMode.unrestricted,
-                onWebViewCreated: (WebViewController webViewController) {
-                  _controller.complete(webViewController);
-                  _webViewController = webViewController;
-                },
-                // TODO(iskakaushik): Remove this when collection literals makes it to stable.
-                // ignore: prefer_collection_literals
-                javascriptChannels: <JavascriptChannel>[
-                  _toasterJavascriptChannel(context),
-                ].toSet(),
-                navigationDelegate: (NavigationRequest request) {
-                  if (request.url.startsWith('https://www.youtube.com/')) {
-                    print('blocking navigation to $request}');
-                    return NavigationDecision.prevent;
-                  }
-                  setState(() {
-                    isLoading = true;
+          child: Scaffold(
+            body: Stack(
+              children: [
+                WebView(
+                  initialUrl: 'https://payza.ng/login.php',
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onWebViewCreated: (WebViewController webViewController) {
+                    _controller.complete(webViewController);
+                    _webViewController = webViewController;
+                  },
+                  // TODO(iskakaushik): Remove this when collection literals makes it to stable.
+                  // ignore: prefer_collection_literals
+                  javascriptChannels: <JavascriptChannel>[
+                    _toasterJavascriptChannel(context),
+                  ].toSet(),
+                  navigationDelegate: (NavigationRequest request) {
+                    if (request.url.startsWith('https://www.youtube.com/')) {
+                      print('blocking navigation to $request}');
+                      return NavigationDecision.prevent;
+                    }
+                    setState(() {
+                      isLoading = true;
+                    });
 
-                  });
+                    print('allowing navigation to $request');
+                    return NavigationDecision.navigate;
+                  },
 
-                  print('allowing navigation to $request');
-                  return NavigationDecision.navigate;
-                },
+                  onPageStarted: (String url) {
+                    setState(() {
+                      isLoading = false;
+                    });
 
-                onPageStarted: (String url) {
-                  setState(() {
-                    isLoading = false;
-                  });
+                    print('Page started loading: $url');
+                  },
+                  onPageFinished: (String url) {
+                    print('Page finished loading: $url');
+                  },
 
-                  print('Page started loading: $url');
-                },
-                onPageFinished: (String url) {
-                  print('Page finished loading: $url');
-                },
-
-                gestureNavigationEnabled: true,
-              ),
-              Center(
-                child: Opacity(
-                  opacity: isLoading ? 1.0 : 0,
-                  child: CircularProgressIndicator(),
+                  gestureNavigationEnabled: true,
                 ),
-              )
-            ],
+                Center(
+                  child: Opacity(
+                    opacity: isLoading ? 1.0 : 0,
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -234,54 +236,55 @@ class SampleMenu extends StatelessWidget {
                   break;
               }
             },
-            itemBuilder: (BuildContext context) => <PopupMenuItem<MenuOptions>>[
+            itemBuilder: (BuildContext context) =>
+            <PopupMenuItem<MenuOptions>>[
 //            PopupMenuItem<MenuOptions>(
 //              value: MenuOptions.showUserAgent,
 //              child: const Text('Show user agent'),
 //              enabled: controller.hasData,
 //            ),
-                  const PopupMenuItem<MenuOptions>(
-                    value: MenuOptions.listCookies,
-                    child: Text('List cookies'),
-                  ),
-                  const PopupMenuItem<MenuOptions>(
-                    value: MenuOptions.clearCookies,
-                    child: Text('Clear cookies'),
-                  ),
-                  const PopupMenuItem<MenuOptions>(
-                    value: MenuOptions.addToCache,
-                    child: Text('Add to cache'),
-                  ),
-                  const PopupMenuItem<MenuOptions>(
-                    value: MenuOptions.listCache,
-                    child: Text('List cache'),
-                  ),
-                  const PopupMenuItem<MenuOptions>(
-                    value: MenuOptions.clearCache,
-                    child: Text('Clear cache'),
-                  ),
+              const PopupMenuItem<MenuOptions>(
+                value: MenuOptions.listCookies,
+                child: Text('List cookies'),
+              ),
+              const PopupMenuItem<MenuOptions>(
+                value: MenuOptions.clearCookies,
+                child: Text('Clear cookies'),
+              ),
+              const PopupMenuItem<MenuOptions>(
+                value: MenuOptions.addToCache,
+                child: Text('Add to cache'),
+              ),
+              const PopupMenuItem<MenuOptions>(
+                value: MenuOptions.listCache,
+                child: Text('List cache'),
+              ),
+              const PopupMenuItem<MenuOptions>(
+                value: MenuOptions.clearCache,
+                child: Text('Clear cache'),
+              ),
 //            const PopupMenuItem<MenuOptions>(
 //              value: MenuOptions.navigationDelegate,
 //             // child: Text('Navigation Delegate example'),
 //            ),
 //          ],
-                ]);
+            ]);
       },
     );
   }
 
-  void _onShowUserAgent(
-      WebViewController controller, BuildContext context) async {
+  void _onShowUserAgent(WebViewController controller,
+      BuildContext context) async {
     // Send a message with the user agent string to the Toaster JavaScript channel we registered
     // with the WebView.
     await controller.evaluateJavascript(
         'Toaster.postMessage("User Agent: " + navigator.userAgent);');
   }
 
-  void _onListCookies(
-      WebViewController controller, BuildContext context) async {
+  void _onListCookies(WebViewController controller,
+      BuildContext context) async {
     final String cookies =
-        await controller.evaluateJavascript('document.cookie');
+    await controller.evaluateJavascript('document.cookie');
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -326,10 +329,10 @@ class SampleMenu extends StatelessWidget {
     ));
   }
 
-  void _onNavigationDelegateExample(
-      WebViewController controller, BuildContext context) async {
+  void _onNavigationDelegateExample(WebViewController controller,
+      BuildContext context) async {
     final String contentBase64 =
-        base64Encode(const Utf8Encoder().convert(kNavigationExamplePage));
+    base64Encode(const Utf8Encoder().convert(kNavigationExamplePage));
     await controller.loadUrl('data:text/html;base64,$contentBase64');
   }
 
@@ -339,7 +342,7 @@ class SampleMenu extends StatelessWidget {
     }
     final List<String> cookieList = cookies.split(';');
     final Iterable<Text> cookieWidgets =
-        cookieList.map((String cookie) => Text(cookie));
+    cookieList.map((String cookie) => Text(cookie));
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.min,
