@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40cace89-b0f9-4566-844d-65e3213d3e34" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/webview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/webview.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,13 +63,21 @@
       <option name="project" value="LOCAL" />
       <updated>1606341797213</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Payza.ng -&gt; PayPaddi">
+      <created>1608582219666</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1608582219667</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Version 2.0" />
     <MESSAGE value="Version 3.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 3.0" />
+    <MESSAGE value="Payza.ng -&gt; PayPaddi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Payza.ng -&gt; PayPaddi" />
   </component>
   <component name="WindowStateProjectService">
     <state x="125" y="56" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606078079830">
@@ -79,10 +85,10 @@
     </state>
     <state x="125" y="56" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1606078079830" />
     <state x="104" y="73" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1280.777@0.23.1280.777" timestamp="1605618243653" />
-    <state x="424" y="27" key="CommitChangelistDialog2" timestamp="1606341776240">
+    <state x="424" y="27" key="CommitChangelistDialog2" timestamp="1608582198644">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="424" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1606341776240" />
+    <state x="424" y="27" key="CommitChangelistDialog2/0.0.1536.864@0.0.1536.864" timestamp="1608582198644" />
     <state x="441" y="142" key="FileChooserDialogImpl" timestamp="1608581607174">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -129,10 +135,10 @@
     </state>
     <state x="177" y="14" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1608581631707" />
     <state x="141" y="50" key="SettingsEditor/0.23.1280.777@0.23.1280.777" timestamp="1605617923453" />
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1606341829351">
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2" timestamp="1608582491991">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1606341829351" />
+    <state x="361" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.864@0.0.1536.864" timestamp="1608582491991" />
     <state x="93" y="93" width="1350" height="678" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1606078400659">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
