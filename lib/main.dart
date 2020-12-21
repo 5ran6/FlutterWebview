@@ -97,7 +97,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           PageViewModel(
             title: "Recharge Cable Tv",
             body:
-            "Instantly Recharge your GoTv, DStv & Startimes online on Payza Nigeria and avoid waiting in the queues.",
+            "Instantly Recharge your GoTv, DStv & Startimes online on PayPaddi and avoid waiting in the queues.",
             image: _buildImage('img2'),
             decoration: pageDecoration,
           ),

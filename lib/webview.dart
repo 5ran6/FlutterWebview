@@ -46,7 +46,7 @@ class _WebViewExampleState extends State<WebViewExample> {
       builder: (context) =>
       new AlertDialog(
         title: new Text('Are you sure?'),
-        content: new Text('Do you want to exit Payza?'),
+        content: new Text('Do you want to exit PayPaddi?'),
         actions: <Widget>[
           new FlatButton(
             onPressed: () => Navigator.of(context).pop(false),
@@ -105,7 +105,7 @@ class _WebViewExampleState extends State<WebViewExample> {
             body: Stack(
               children: [
                 WebView(
-                  initialUrl: 'https://payza.ng/login.php',
+                  initialUrl: 'https://paypaddi.com/login.php',
                   javascriptMode: JavascriptMode.unrestricted,
                   onWebViewCreated: (WebViewController webViewController) {
                     _controller.complete(webViewController);

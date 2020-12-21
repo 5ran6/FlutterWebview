@@ -1,5 +1,5 @@
 name: payza
-description: Payza Nigeria is the No 1 online platform for paying your electricity, televsion and mobile bills
+description: PayPaddi is the No 1 online platform for paying your electricity, televsion and mobile bills
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -11,7 +11,7 @@ description: Payza Nigeria is the No 1 online platform for paying your electrici
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.3+3
+version: 1.0.4+4
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
