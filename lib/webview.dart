@@ -30,9 +30,23 @@ class WebViewExample extends StatefulWidget {
   _WebViewExampleState createState() => _WebViewExampleState();
 }
 
+WebViewController controllerGlobal;
+
+Future<bool> _exitApp(BuildContext context) async {
+  if (await controllerGlobal.canGoBack()) {
+    print("onwill goback");
+    controllerGlobal.goBack();
+  } else {
+    Scaffold.of(context).showSnackBar(
+      const SnackBar(content: Text("No back history item")),
+    );
+    return Future.value(false);
+  }
+}
+
 class _WebViewExampleState extends State<WebViewExample> {
   final Completer<WebViewController> _controller =
-  Completer<WebViewController>();
+      Completer<WebViewController>();
   bool isLoading = false;
 
   Future initState() {
@@ -42,23 +56,22 @@ class _WebViewExampleState extends State<WebViewExample> {
 
   Future<bool> _onWillPop() async {
     return (await showDialog(
-      context: context,
-      builder: (context) =>
-      new AlertDialog(
-        title: new Text('Are you sure?'),
-        content: new Text('Do you want to exit PayPaddi?'),
-        actions: <Widget>[
-          new FlatButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: new Text('No'),
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit PayPaddi?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text('No'),
+              ),
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: new Text('Yes'),
+              ),
+            ],
           ),
-          new FlatButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: new Text('Yes'),
-          ),
-        ],
-      ),
-    )) ??
+        )) ??
         false;
   }
 
@@ -98,18 +111,19 @@ class _WebViewExampleState extends State<WebViewExample> {
 
     return SafeArea(
       child: WillPopScope(
-        onWillPop: _onWillPop,
+        onWillPop: () => _exitApp(context),
         child: new RefreshIndicator(
           onRefresh: () => reload(),
           child: Scaffold(
             body: Stack(
               children: [
                 WebView(
-                  initialUrl: 'https://paypaddi.com/login.php',
+//                  initialUrl: 'https://paypaddi.com/login.php',
+                  initialUrl: 'https://www.firmlife.com.ng/login',
                   javascriptMode: JavascriptMode.unrestricted,
                   onWebViewCreated: (WebViewController webViewController) {
                     _controller.complete(webViewController);
-                    _webViewController = webViewController;
+//                    _webViewController = webViewController;
                   },
                   // TODO(iskakaushik): Remove this when collection literals makes it to stable.
                   // ignore: prefer_collection_literals
@@ -236,55 +250,54 @@ class SampleMenu extends StatelessWidget {
                   break;
               }
             },
-            itemBuilder: (BuildContext context) =>
-            <PopupMenuItem<MenuOptions>>[
+            itemBuilder: (BuildContext context) => <PopupMenuItem<MenuOptions>>[
 //            PopupMenuItem<MenuOptions>(
 //              value: MenuOptions.showUserAgent,
 //              child: const Text('Show user agent'),
 //              enabled: controller.hasData,
 //            ),
-              const PopupMenuItem<MenuOptions>(
-                value: MenuOptions.listCookies,
-                child: Text('List cookies'),
-              ),
-              const PopupMenuItem<MenuOptions>(
-                value: MenuOptions.clearCookies,
-                child: Text('Clear cookies'),
-              ),
-              const PopupMenuItem<MenuOptions>(
-                value: MenuOptions.addToCache,
-                child: Text('Add to cache'),
-              ),
-              const PopupMenuItem<MenuOptions>(
-                value: MenuOptions.listCache,
-                child: Text('List cache'),
-              ),
-              const PopupMenuItem<MenuOptions>(
-                value: MenuOptions.clearCache,
-                child: Text('Clear cache'),
-              ),
+                  const PopupMenuItem<MenuOptions>(
+                    value: MenuOptions.listCookies,
+                    child: Text('List cookies'),
+                  ),
+                  const PopupMenuItem<MenuOptions>(
+                    value: MenuOptions.clearCookies,
+                    child: Text('Clear cookies'),
+                  ),
+                  const PopupMenuItem<MenuOptions>(
+                    value: MenuOptions.addToCache,
+                    child: Text('Add to cache'),
+                  ),
+                  const PopupMenuItem<MenuOptions>(
+                    value: MenuOptions.listCache,
+                    child: Text('List cache'),
+                  ),
+                  const PopupMenuItem<MenuOptions>(
+                    value: MenuOptions.clearCache,
+                    child: Text('Clear cache'),
+                  ),
 //            const PopupMenuItem<MenuOptions>(
 //              value: MenuOptions.navigationDelegate,
 //             // child: Text('Navigation Delegate example'),
 //            ),
 //          ],
-            ]);
+                ]);
       },
     );
   }
 
-  void _onShowUserAgent(WebViewController controller,
-      BuildContext context) async {
+  void _onShowUserAgent(
+      WebViewController controller, BuildContext context) async {
     // Send a message with the user agent string to the Toaster JavaScript channel we registered
     // with the WebView.
     await controller.evaluateJavascript(
         'Toaster.postMessage("User Agent: " + navigator.userAgent);');
   }
 
-  void _onListCookies(WebViewController controller,
-      BuildContext context) async {
+  void _onListCookies(
+      WebViewController controller, BuildContext context) async {
     final String cookies =
-    await controller.evaluateJavascript('document.cookie');
+        await controller.evaluateJavascript('document.cookie');
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -329,10 +342,10 @@ class SampleMenu extends StatelessWidget {
     ));
   }
 
-  void _onNavigationDelegateExample(WebViewController controller,
-      BuildContext context) async {
+  void _onNavigationDelegateExample(
+      WebViewController controller, BuildContext context) async {
     final String contentBase64 =
-    base64Encode(const Utf8Encoder().convert(kNavigationExamplePage));
+        base64Encode(const Utf8Encoder().convert(kNavigationExamplePage));
     await controller.loadUrl('data:text/html;base64,$contentBase64');
   }
 
@@ -342,7 +355,7 @@ class SampleMenu extends StatelessWidget {
     }
     final List<String> cookieList = cookies.split(';');
     final Iterable<Text> cookieWidgets =
-    cookieList.map((String cookie) => Text(cookie));
+        cookieList.map((String cookie) => Text(cookie));
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.min,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:payza/webview.dart';
+import 'package:payza/web_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // class App extends StatelessWidget {
